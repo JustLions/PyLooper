@@ -62,6 +62,8 @@ font = pg.font.Font('freesansbold.ttf', 32)
 text = font.render('Goodbye ' + name + '!', True, green, blue)
 textX = 200; textY = 200
 textRect = text.get_rect(); textRect.center = (textX // 2, textY // 2)
+isJump = False
+jumpCount = 10
 
 while not Character.dead:
     if bgX < bg.get_width() * -1:  # If our bg is at the -width then reset its position
@@ -75,8 +77,24 @@ while not Character.dead:
                 x_change = 10
             if event.key == pg.K_LEFT:
                 x_change = -10
-            if event.key == pg.K_UP:
-                y_change = -20
+            if not (isJump):
+                if event.key == pg.K_UP:
+                    y_change = -20
+                if event.key == pg.K_DOWN:
+                    y_change = 20
+                if event.key == pg.K_SPACE:
+                    isJump = True
+            else:
+                if jumpCount >= -10:
+                    neg = 1
+                    if jumpCount < 0:
+                        neg = -1
+                    y -= (jumpCount ** 2) * 0.5 * neg
+                    jumpCount -= 1
+                else:
+                    isJump = False
+                    jumpCount = 10
+
         if event.type == pg.KEYUP:
             if event.key == pg.K_RIGHT or event.key == pg.K_LEFT:
                 x_change = 0
