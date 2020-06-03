@@ -1,14 +1,13 @@
 import sys
 import pygame as pg
 import time
-import random
 
 # Inicializamos pygame
 pg.init()
 
 # Propiedades Ventana
 W, H = 800, 600
-size = pg.display.set_mode((W,H))
+size = pg.display.set_mode((W, H))
 pg.display.set_caption("Looper")
 
 looper_character = pg.image.load("looper_char.png")
@@ -34,28 +33,18 @@ clock = pg.time.Clock()
 class Character:
     dead = False
 
-    def __init__(self, x, y, width, height):
-        self.x = x
-        self.y = y
+    def __init__(self, char_x, char_y, width, height):
+        self.char_x = char_x
+        self.char_y = char_y
         self.width = width
         self.height = height
         self.jumping = False
         self.jumpCount = 0
         self.runCount = 0
 
-    def move(self):
-        self.pos = self.pos.move(0, self.speed)
-        if self.pos.top < -200:
-            self.pos.bottom = 800
 
-
-def game_score():
-    points = 0
-    timepassed = 0
-
-
-def looper_char(x, y):
-    size.blit(looper_character, (x, y))
+def looper_char(char_x, char_y):
+    size.blit(looper_character, (char_x, char_y))
 
 
 def redraw_window():
@@ -101,8 +90,12 @@ while not Character.dead:
     size.blit(bg, (0, 0))
     size.blit(sun, (150, 100))
     size.blit(floor, (0, 500))
-    x += x_change
-    y = 410 + y_change
+    if 0 <= x <= 710:
+        x += x_change
+    if x < 0:
+        x = 0
+    if x > 710:
+        x = 710
     looper_char(x, y)
     clock.tick(60)
     pg.display.update()
