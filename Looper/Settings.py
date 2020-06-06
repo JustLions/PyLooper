@@ -9,11 +9,11 @@ black = (0, 0, 0); white = (255, 255, 255); green = (0, 255, 0); blue = (0, 0, 1
 
 # Player properties
 charAcc = 0.6
-charGrav = 0.8
+charGrav = 0
 charFric = -0.12
 
 # Platforms
-Platforms = [(x, y, W, H)]
+Platforms = [(0, 650, 1600, 250)]
 
 # Items
 ITEM_LIST = []
