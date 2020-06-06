@@ -1,6 +1,8 @@
-from Views.Level1 import *
+from Views.Levels import *
+
 
 class Game:
 
     def __init__(self):
-        Level1().start()
+        Level1()
+

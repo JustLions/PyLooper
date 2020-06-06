@@ -1,7 +1,8 @@
 from Game import *
-from Views.Level1 import *
+from Views.Levels import *
 from Character import *
 running = True
+
 
 class Main:
 
@@ -14,8 +15,8 @@ class Main:
 
 
 while running:
+    Main()
     event = pg.event.poll()
     if event.type == pg.QUIT:
         running = False
-    Main()
     pg.display.update()

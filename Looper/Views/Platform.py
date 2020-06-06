@@ -1,11 +1,16 @@
 import pygame as pg
+import random
 
 
 class Platform(pg.sprite.Sprite):
 
-    def __init__(self, x, y, w, h):
+    def __init__(self):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((w, h), pg.SRCALPHA, 32 )
+        self.image = pg.Surface((1600, 50), pg.SRCALPHA, 32)
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.center = (800, 724)
+
+    def update(self):
+        self.rect.x += 0
+        if self.rect.x > 1600:
+            self.rect.x = 0

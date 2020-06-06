@@ -7,24 +7,33 @@ class Level1:
 
     screen = pg.display.set_mode((W, H))
 
-    def start(self):
+    def __init__(self):
         self.screen = pg.display.set_mode((W, H))
+
+        # We create the sprite groups for the specific level and add our character properties to it
         self.all_sprites = pg.sprite.Group()
-        self.character = Character()
+        self.platforms = pg.sprite.Group()
+        self.character = Character(self)
         self.all_sprites.add(self.character)
-        for i in Platforms:
-            p = Platform(*i)
-            self.all_sprites.add(p)
+
+        # We add every platform to each sprite group
+        platform = Platform()
+        self.all_sprites.add(platform)
+        self.platforms.add(platform)
+
         self.run()
 
+    # Active Game Loop from here on
+
     def run(self):
-        self.playing = True
-        while self.playing:
+        playing = True
+        while playing:
             self.draw()
             self.update()
 
     def draw(self):
-        # Game Loop - draw
+
+        # We draw the static images and all sprites onto the screen
         self.screen.blit(bg, (0, 0))
         self.screen.blit(sun, (150, 100))
         self.screen.blit(floor, (0, 700))
@@ -35,18 +44,4 @@ class Level1:
         self.all_sprites.update()
 
 
-
-
-
-
-
-
-
-
-
-    '''def __init__(self):
-        self.all_sprites.add(character)
-        for plat in Platforms:
-            p = Platform(*plat)  # Falta entender
-            all_sprites.add(p)
-            platforms.add(p)'''
+level1 = Level1()
