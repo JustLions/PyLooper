@@ -25,8 +25,6 @@ class Level1:
         self.characters.add(self.character)
         self.enemies.add(self.enemy)
 
-
-        # We add every platform to each sprite group
         for i in Platforms:
             platform = CreatePlatform(*i)
             self.all_sprites.add(platform)
@@ -53,9 +51,7 @@ class Level1:
 
     def respawn(self):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((100, 200))
-        self.rect = self.image.get_rect()
-        self.rect.center = (800, 450)
+        pg.draw.rect(self.screen, (255, 0, 255), (800, 450, 100, 100))
 
     def update(self):
         self.all_sprites.update()

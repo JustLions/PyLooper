@@ -34,7 +34,7 @@ class Character(pg.sprite.Sprite):
         key = pg.key.get_pressed()
 
         if key[pg.K_SPACE] and hit_platform:
-            self.jump(hit_platform)
+            self.jump(hit_platform, char_hit_enemy)
         if key[pg.K_RIGHT]:
             self.pos.x += charAcc
             self.image = looper_char_right
@@ -68,6 +68,7 @@ class Character(pg.sprite.Sprite):
 
     def die(self):
         pg.sprite.spritecollide(self, self.level1.characters, 1)
+        # Level1.respawn()
 
 
 class Enemy(pg.sprite.Sprite):
@@ -76,7 +77,7 @@ class Enemy(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
         self.image = enemy_koopa_left
-        self.rect = self.image.get_rect(x=500)
+        self.rect = self.image.get_rect(x=650)
         self.pos = vec(random.randint(0, 1600), 0)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
