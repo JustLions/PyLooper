@@ -12,8 +12,9 @@ charAcc = 3
 charGrav = 0.6
 charFric = -0.12
 
-# Platforms
-Platforms = [(0, 600, 1600, 50)]
+# Platforms (x, y, width, height)
+Platforms = [(800, 724, 1600, 50), (800, 625, 200, 40)]
+Buttons = [(800, 450, 100, 100)]
 
 # Items
 ITEM_LIST = []
