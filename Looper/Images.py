@@ -21,4 +21,7 @@ bg = pg.image.load("Images/Environment/background.gif")
 bg = pg.transform.scale(bg, (1600, 700))
 
 reset_button = pg.image.load("Images/reset_button.png")
-reset_button = pg.transform.scale(bg, (100, 100))
+reset_button = pg.transform.scale(reset_button, (150, 125))
+
+reset_button_onhover = pg.image.load("Images/reset_button_onhover.png")
+reset_button_onhover = pg.transform.scale(reset_button_onhover, (150, 125))

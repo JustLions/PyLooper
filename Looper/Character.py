@@ -10,6 +10,8 @@ vec = pg.math.Vector2
 
 class Character(pg.sprite.Sprite):
 
+    dead = False
+
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
@@ -18,6 +20,7 @@ class Character(pg.sprite.Sprite):
         self.pos = vec(50, 650)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
+
 
     def update(self):
         hit_platform = pg.sprite.spritecollide(self, self.level1.platforms, 0)
@@ -35,6 +38,8 @@ class Character(pg.sprite.Sprite):
 
         if key[pg.K_SPACE] and hit_platform:
             self.jump(hit_platform, char_hit_enemy)
+        if key[pg.K_q] :
+            self.die()
         if key[pg.K_RIGHT]:
             self.pos.x += charAcc
             self.image = looper_char_right
@@ -60,7 +65,7 @@ class Character(pg.sprite.Sprite):
             self.pos.x = 0
 
     def jump(self, hit_platform, char_hit_enemy):
-        jump_sound()
+        # jump_sound()
         self.pos.y += -45
         if hit_platform or char_hit_enemy:
             self.vel.y = -30
@@ -68,7 +73,7 @@ class Character(pg.sprite.Sprite):
 
     def die(self):
         pg.sprite.spritecollide(self, self.level1.characters, 1)
-        # Level1.respawn()
+        Character.dead = True
 
 
 class Enemy(pg.sprite.Sprite):
