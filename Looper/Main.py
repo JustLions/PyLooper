@@ -10,12 +10,15 @@ class Main:
         pg.init()
         pg.display.set_caption(Title)
         pg.time.Clock().tick(FPS)
-        Game()
         pg.display.flip()
 
+## Setup functions, run only once.
+Main()
+game = Game()
 
+## Game constantly executing.
 while running:
-    Main()
+    game.run()
     event = pg.event.poll()
     if event.type == pg.QUIT:
         running = False
