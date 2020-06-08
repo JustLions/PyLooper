@@ -16,7 +16,7 @@ class Character(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
         self.image = looper_char_right
-        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect(x=50, y=650)
         self.pos = vec(50, 650)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
@@ -37,7 +37,7 @@ class Character(pg.sprite.Sprite):
 
         if key[pg.K_SPACE] and hit_platform:
             self.jump(hit_platform, char_hit_enemy)
-        if key[pg.K_q] :
+        if key[pg.K_q]:
             self.die()
         if key[pg.K_RIGHT]:
             self.pos.x += charAcc

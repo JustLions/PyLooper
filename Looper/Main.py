@@ -16,7 +16,6 @@ class Main:
 
 # Setup functions, run only once.
 Main()
-
 game = Game()
 
 while running:

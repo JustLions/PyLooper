@@ -36,10 +36,16 @@ class Level1:
         if Character.dead:
             pg.event.pump()
             mouse = pg.mouse.get_pos()
-            if 950 > mouse[0] > 800 and 575 > mouse[1] > 450:
-                self.screen.blit(reset_button_onhover, (800, 450))
+            if 850 > mouse[0] > 700 and 575 > mouse[1] > 450:
+                self.screen.blit(reset_button_onhover, (700, 450))
+                if pg.mouse.get_pressed()[0] == 1:
+                    Character.dead = False
+                    self.character = Character(self)
+                    self.all_sprites.add(self.character)
+                    self.characters.add(self.character)
+                    self.screen.blit(bg, (0, 0))
             else:
-                self.screen.blit(reset_button, (800, 450))
+                self.screen.blit(reset_button, (700, 450))
         self.all_sprites.draw(self.screen)
         pg.display.flip()
 
