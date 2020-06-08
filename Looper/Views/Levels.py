@@ -30,16 +30,6 @@ class Level1:
             self.all_sprites.add(platform)
             self.platforms.add(platform)
 
-        self.run()
-
-    # Active Game Loop from here on
-
-    def run(self):
-        playing = True
-        while playing:
-            self.draw()
-            self.update()
-
     def draw(self):
 
         # We draw the static images and all sprites onto the screen
