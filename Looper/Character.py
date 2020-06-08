@@ -21,7 +21,6 @@ class Character(pg.sprite.Sprite):
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
-
     def update(self):
         hit_platform = pg.sprite.spritecollide(self, self.level1.platforms, 0)
         char_hit_enemy = pg.sprite.spritecollide(self, self.level1.enemies, 0)

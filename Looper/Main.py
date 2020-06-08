@@ -14,8 +14,13 @@ class Main:
         pg.display.flip()
 
 
+# Setup functions, run only once.
+Main()
+
+game = Game()
+
 while running:
-    Main()
+    game.run()
     event = pg.event.poll()
     if event.type == pg.QUIT:
         running = False

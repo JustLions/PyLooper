@@ -6,3 +6,6 @@ class Game:
     def __init__(self):
         Level1()
 
+    def run(self):
+        level1.draw()
+        level1.update()

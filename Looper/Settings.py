@@ -14,6 +14,7 @@ charFric = -0.12
 
 # Platforms (x, y, width, height)
 Platforms = [(800, 724, 1600, 50)]
+Proyectil = [(100, 100, 100, 100)]
 Buttons = [(800, 450, 100, 100)]
 
 # Items
