@@ -6,6 +6,21 @@ looper_char_right = pg.transform.scale(looper_char_right_pre, (100, 100))
 looper_char_left = pg.image.load("Images/Character/looper_char_left.png")
 looper_char_left = pg.transform.scale(looper_char_left, (100, 100))
 
+item_bar = pg.image.load("Images/Character/itembar.png")
+item_bar = pg.transform.scale(item_bar, (350, 60))
+
+health_bar_100 = pg.image.load("Images/Character/Health_bar_100.png")
+health_bar_100 = pg.transform.scale(health_bar_100, (200, 50))
+health_bar_75 = pg.image.load("Images/Character/Health_bar_75.png")
+health_bar_75 = pg.transform.scale(health_bar_75, (200, 50))
+health_bar_50 = pg.image.load("Images/Character/Health_bar_50.png")
+health_bar_50 = pg.transform.scale(health_bar_50, (200, 50))
+health_bar_25 = pg.image.load("Images/Character/Health_bar_25.png")
+health_bar_25 = pg.transform.scale(health_bar_25, (200, 50))
+health_bar_0 = pg.image.load("Images/Character/Health_bar_0.png")
+health_bar_0 = pg.transform.scale(health_bar_0, (200, 50))
+
+
 # Enemies
 enemy_koopa_right_pre = pg.image.load("Images/Enemies/enemy_koopa_right.png")
 enemy_koopa_right = pg.transform.scale(enemy_koopa_right_pre, (100, 100))

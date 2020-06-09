@@ -42,9 +42,13 @@ class Character(pg.sprite.Sprite):
             self.jump(hit_platform, char_hit_enemy)
         if key[pg.K_q]:
             self.die()
-        if key[pg.K_RIGHT]:
-            self.pos.x += charAcc
-            self.image = looper_char_right
+        if self.pos.x < 800:
+            if key[pg.K_RIGHT]:
+                self.pos.x += charAcc
+                self.image = looper_char_right
+                self.bgX -= scroll_speed
+                self.bgX2 -= scroll_speed
+        if self.pos.x > 800:
             self.bgX -= scroll_speed
             self.bgX2 -= scroll_speed
         if key[pg.K_LEFT]:
@@ -95,8 +99,8 @@ class Enemy(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
         self.image = enemy_koopa_left
-        self.rect = self.image.get_rect(x=650)
-        self.pos = vec(random.randint(0, 1600), 0)
+        self.rect = self.image.get_rect(x=1000, y=650)
+        self.pos = vec(1000, 650)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
@@ -104,8 +108,8 @@ class Enemy(pg.sprite.Sprite):
         hit_platform = pg.sprite.spritecollide(self, self.level1.platforms, 0)
 
         if hit_platform:
-            self.pos.y = 0
-            self.pos.x = random.randint(0, 1600)
+            self.pos.y = 650
+            self.pos.x = 1000
 
         # Updates the rectangle position
         self.rect.center = self.pos

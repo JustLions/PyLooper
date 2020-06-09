@@ -17,7 +17,7 @@ class Level1:
         self.projectiles = pg.sprite.Group()
 
         self.character = Character(self); self.enemy = Enemy(self)
-        self.all_sprites.add(self.character); self.all_sprites.add(self.enemy)
+        self.all_sprites.add(self.character); # self.all_sprites.add(self.enemy)
         self.characters.add(self.character); self.enemies.add(self.enemy)
 
         for i in Platforms:
@@ -36,15 +36,23 @@ class Level1:
         self.screen.blit(floor, (self.character.bgX2, 700))
 
         font = pg.font.SysFont("Calibri", 25)
-        char_hp_ui = font.render("Health:", 1, black)
-        char_hp = font.render(str(self.character.hp), 1, black)
+        if 75 < self.character.hp <= 100:
+            self.screen.blit(health_bar_100, (20, 20))
+        if 50 < self.character.hp <= 75:
+            self.screen.blit(health_bar_75, (20, 20))
+        if 25 < self.character.hp <= 50:
+            self.screen.blit(health_bar_50, (20, 20))
+        if 0 < self.character.hp <= 25:
+            self.screen.blit(health_bar_25, (20, 20))
+        if 0 == self.character.hp:
+            self.screen.blit(health_bar_0, (20, 20))
+
+        self.screen.blit(item_bar, (625, 800))
+
         char_points_ui = font.render("Points:", 1, black)
         char_points = font.render(str(self.character.points), 1, black)
-
-        self.screen.blit(char_hp_ui, (20, 20))
-        self.screen.blit(char_hp, (100, 20))
-        self.screen.blit(char_points_ui, (20, 50))
-        self.screen.blit(char_points, (100, 50))
+        self.screen.blit(char_points_ui, (25, 80))
+        self.screen.blit(char_points, (105, 80))
 
         if Character.dead:
             pg.event.pump()
