@@ -1,10 +1,13 @@
+import pygame as pg
+import random
+
 # Game Settings
 W, H = 1600, 900
 x = 0; y = 650; x_change = 0; y_change = 0
 FPS = 60
 Title = 'Looper'
 
-# Colors
+# Colors and Font
 black = (0, 0, 0); white = (255, 255, 255); green = (0, 255, 0); blue = (0, 0, 128)
 
 # Player properties

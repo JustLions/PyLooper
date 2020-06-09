@@ -29,6 +29,14 @@ class Level1:
         self.screen.blit(bg, (0, 0))
         self.screen.blit(sun, (150, 100))
         self.screen.blit(floor, (0, 700))
+
+        font = pg.font.SysFont("Calibri", 25)
+        char_points_ui = font.render("Points:", 1, black)
+        char_points = font.render(str(self.character.points), 1, black)
+
+        self.screen.blit(char_points_ui, (20, 20))
+        self.screen.blit(char_points, (100, 20))
+
         if Character.dead:
             pg.event.pump()
             mouse = pg.mouse.get_pos()
@@ -48,6 +56,8 @@ class Level1:
     def shoot(self):
         self.projectile = Projectile(self)
         self.projectile.pos = vec(self.character.pos.x, self.character.pos.y)
+        self.image = bullet1
+        self.rect = self.image.get_rect(x=self.character.pos.x, y=self.character.pos.y)
         self.projectiles.add(self.projectile)
         self.all_sprites.add(self.projectile)
 

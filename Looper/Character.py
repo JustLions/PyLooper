@@ -21,6 +21,7 @@ class Character(pg.sprite.Sprite):
         self.pos = vec(50, 650)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
+        self.points = 0
 
     def update(self):
         hit_platform = pg.sprite.spritecollide(self, self.level1.platforms, 0)
@@ -46,12 +47,12 @@ class Character(pg.sprite.Sprite):
         if key[pg.K_LEFT]:
             self.pos.x -= charAcc
             self.image = looper_char_left
-        for event in pg.event.get():
-            if pg.KEYDOWN:
-                if key[pg.K_w]:
+        for e in pg.event.get():
+            if e.type == pg.KEYDOWN:
+                if e.key == pg.K_w:
                     self.level1.shoot()
 
-        # Updates the rectangle position
+        # Updates the rectanwgle position
         self.rect.center = self.pos
 
         # Apply friction
@@ -121,13 +122,13 @@ class Projectile(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
         self.image = bullet1
-        self.rect = self.image.get_rect(x=50, y=650)
+        character = Character(self)
+        self.rect = self.image.get_rect()
         self.pos = vec(50, 650)
 
     def update(self):
         self.pos.x += bullet1Speed
         self.rect.center = self.pos
-
 
 
 
