@@ -11,6 +11,7 @@ vec = pg.math.Vector2
 class Character(pg.sprite.Sprite):
 
     dead = False
+    image = looper_char_right
 
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
@@ -45,6 +46,10 @@ class Character(pg.sprite.Sprite):
         if key[pg.K_LEFT]:
             self.pos.x -= charAcc
             self.image = looper_char_left
+        for event in pg.event.get():
+            if pg.KEYDOWN:
+                if key[pg.K_w]:
+                    self.level1.shoot()
 
         # Updates the rectangle position
         self.rect.center = self.pos
@@ -109,6 +114,21 @@ class Enemy(pg.sprite.Sprite):
             self.pos.x = 1600
         if self.pos.x < 0:
             self.pos.x = 0
+
+
+class Projectile(pg.sprite.Sprite):
+    def __init__(self, level1):
+        pg.sprite.Sprite.__init__(self)
+        self.level1 = level1
+        self.image = bullet1
+        self.rect = self.image.get_rect(x=50, y=650)
+        self.pos = vec(50, 650)
+
+    def update(self):
+        self.pos.x += bullet1Speed
+        self.rect.center = self.pos
+
+
 
 
 

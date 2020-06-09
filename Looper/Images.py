@@ -12,6 +12,10 @@ enemy_koopa_right = pg.transform.scale(enemy_koopa_right_pre, (100, 100))
 enemy_koopa_left_pre = pg.image.load("Images/Enemies/enemy_koopa_left.png")
 enemy_koopa_left = pg.transform.scale(enemy_koopa_left_pre, (100, 100))
 
+# Bullets
+
+bullet1_pre = pg.image.load("Images/Character/bullet1.png")
+bullet1 = pg.transform.scale(bullet1_pre, (25, 25))
 
 sun = pg.image.load("Images/Environment/sun.png")
 sun = pg.transform.scale(sun, (150, 150))

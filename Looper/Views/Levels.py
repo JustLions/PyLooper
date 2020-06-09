@@ -14,15 +14,11 @@ class Level1:
         self.platforms = pg.sprite.Group()
         self.characters = pg.sprite.Group()
         self.enemies = pg.sprite.Group()
+        self.projectiles = pg.sprite.Group()
 
-        self.character = Character(self)
-        self.enemy = Enemy(self)
-
-        self.all_sprites.add(self.character)
-        self.all_sprites.add(self.enemy)
-
-        self.characters.add(self.character)
-        self.enemies.add(self.enemy)
+        self.character = Character(self); self.enemy = Enemy(self)
+        self.all_sprites.add(self.character); self.all_sprites.add(self.enemy)
+        self.characters.add(self.character); self.enemies.add(self.enemy)
 
         for i in Platforms:
             platform = CreatePlatform(*i)
@@ -48,6 +44,13 @@ class Level1:
                 self.screen.blit(reset_button, (700, 450))
         self.all_sprites.draw(self.screen)
         pg.display.flip()
+
+    def shoot(self):
+        self.projectile = Projectile(self)
+        self.projectile.pos = vec(self.character.pos.x, self.character.pos.y)
+        self.projectiles.add(self.projectile)
+        self.all_sprites.add(self.projectile)
+
 
     def update(self):
         self.all_sprites.update()

@@ -12,9 +12,12 @@ charAcc = 3
 charGrav = 0.6
 charFric = -0.12
 
+# Projectile properties
+bullet1Speed = 7
+
 # Platforms (x, y, width, height)
 Platforms = [(800, 724, 1600, 50)]
-Proyectil = [(100, 100, 100, 100)]
+Projectiles = [(50, 600, 25, 25)]
 Buttons = [(700, 450, 100, 100)]
 
 # Items
