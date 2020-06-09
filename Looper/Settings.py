@@ -19,7 +19,7 @@ hp_loss = 5
 start_hp = 100
 
 # Map properties
-scroll_speed = 2
+scroll_speed = 6
 
 # Projectile properties
 bullet1Speed = 12

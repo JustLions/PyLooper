@@ -28,6 +28,9 @@ class Level1:
     def draw(self):
         self.screen.blit(bg, (self.character.bgX, 0))
         self.screen.blit(bg, (self.character.bgX2, 0))
+        self.screen.blit(tree2, (700 + self.character.bgX, 250))
+        self.screen.blit(tree3, (1500 + self.character.bgX, 250))
+        self.screen.blit(tree1, (2400 + self.character.bgX, 400))
         self.screen.blit(sun, (150 + self.character.bgX, 100))
         self.screen.blit(floor, (self.character.bgX, 700))
         self.screen.blit(floor, (self.character.bgX2, 700))
