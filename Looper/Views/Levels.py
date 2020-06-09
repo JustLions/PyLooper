@@ -26,16 +26,22 @@ class Level1:
             self.platforms.add(platform)
 
     def draw(self):
-        self.screen.blit(bg, (0, 0))
-        self.screen.blit(sun, (150, 100))
-        self.screen.blit(floor, (0, 700))
+        self.screen.blit(bg, (self.character.bgX, 0))
+        self.screen.blit(bg, (self.character.bgX2, 0))
+        self.screen.blit(sun, (150 + self.character.bgX, 100))
+        self.screen.blit(floor, (self.character.bgX, 700))
+        self.screen.blit(floor, (self.character.bgX2, 700))
 
         font = pg.font.SysFont("Calibri", 25)
+        char_hp_ui = font.render("Health:", 1, black)
+        char_hp = font.render(str(self.character.hp), 1, black)
         char_points_ui = font.render("Points:", 1, black)
         char_points = font.render(str(self.character.points), 1, black)
 
-        self.screen.blit(char_points_ui, (20, 20))
-        self.screen.blit(char_points, (100, 20))
+        self.screen.blit(char_hp_ui, (20, 20))
+        self.screen.blit(char_hp, (100, 20))
+        self.screen.blit(char_points_ui, (20, 50))
+        self.screen.blit(char_points, (100, 50))
 
         if Character.dead:
             pg.event.pump()

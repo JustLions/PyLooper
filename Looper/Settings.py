@@ -11,12 +11,18 @@ Title = 'Looper'
 black = (0, 0, 0); white = (255, 255, 255); green = (0, 255, 0); blue = (0, 0, 128)
 
 # Player properties
-charAcc = 3
-charGrav = 0.6
+charAcc = 8
+charGrav = 2
 charFric = -0.12
+jump_height = 100
+hp_loss = 5
+start_hp = 100
+
+# Map properties
+scroll_speed = 2
 
 # Projectile properties
-bullet1Speed = 7
+bullet1Speed = 12
 
 # Platforms (x, y, width, height)
 Platforms = [(800, 724, 1600, 50)]

@@ -21,7 +21,7 @@ sun = pg.image.load("Images/Environment/sun.png")
 sun = pg.transform.scale(sun, (150, 150))
 floor = pg.image.load("Images/Environment/suelo.jpg")
 floor = pg.transform.scale(floor, (1600, 200))
-bg = pg.image.load("Images/Environment/background.gif")
+bg = pg.image.load("Images/Environment/background.png")
 bg = pg.transform.scale(bg, (1600, 700))
 
 reset_button = pg.image.load("Images/reset_button.png")
