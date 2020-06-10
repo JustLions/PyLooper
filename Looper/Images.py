@@ -1,6 +1,10 @@
 import pygame as pg
 
 # Character
+looper_char_standing_R = pg.image.load("Images/Character/looper1_standing_R.png")
+looper_char_standing_R = pg.transform.scale(looper_char_standing_R, (150, 150))
+looper_char_standing_L = pg.image.load("Images/Character/looper1_standing_L.png")
+looper_char_standing_L = pg.transform.scale(looper_char_standing_L, (150, 150))
 
 looper_char_R = []
 looper_char1_R = pg.image.load("Images/Character/looper1_R.png")

@@ -30,7 +30,7 @@ class Level1:
         self.screen.blit(bg, (self.character.bgX2 * 0.6, 0))
         self.screen.blit(floor, (self.character.bgX, 450))
         self.screen.blit(floor, (self.character.bgX2, 450))
-        self.screen.blit(tree2, (700 + self.character.bgX, 250))
+        self.screen.blit(tree2, (740 + self.character.bgX, 250))
         self.screen.blit(tree3, (1300 + self.character.bgX, 250))
         self.screen.blit(tree1, (2400 + self.character.bgX, 400))
         self.screen.blit(sun, (150 + self.character.bgX, 100))
@@ -47,7 +47,7 @@ class Level1:
         if 0 == self.character.hp:
             self.screen.blit(health_bar_0, (20, 20))
 
-        self.screen.blit(item_bar, (625, 800))
+        self.screen.blit(item_bar, (600, 820))
         font = pg.font.SysFont("Calibri", 25)
         char_points_ui = font.render("Points:", 1, black)
         char_points = font.render(str(self.character.points), 1, black)
@@ -72,7 +72,7 @@ class Level1:
 
     def shoot(self):
         self.projectile = Projectile(self)
-        self.projectile.pos = vec(self.character.pos.x + 60, self.character.pos.y + 27)
+        self.projectile.pos = vec(self.character.pos.x + 61, self.character.pos.y + 28)
         self.image = bullet1
         self.rect = self.image.get_rect(x=self.character.pos.x, y=self.character.rect.y)
         self.projectiles.add(self.projectile)

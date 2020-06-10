@@ -15,9 +15,9 @@ class Character(pg.sprite.Sprite):
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
-        self.image = looper_char_R[0]
-        self.rect = self.image.get_rect(x=25, y=550)
-        self.pos = vec(100, 690)
+        self.image = looper_char_standing_R
+        self.rect = self.image.get_rect(x=25, y=690)
+        self.pos = vec(100, 650)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.points = 0
