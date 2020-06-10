@@ -24,6 +24,7 @@ class Character(pg.sprite.Sprite):
         self.points = 0
         self.hp = start_hp
         self.index = 0
+        self.frame_count = 0
 
     def update(self):
         hit_platform = pg.sprite.spritecollide(self, self.level1.platforms, 0)
@@ -34,8 +35,6 @@ class Character(pg.sprite.Sprite):
             self.pos.y = 625  # Aquí con más plataformas tendremos que decirle que se quede en pos.y de la plataforma
         if char_hit_enemy:
             self.die()
-
-        pg.time.Clock().tick(50)
 
         # The function event.pump() sends the events that are ocurring
         pg.event.pump()
@@ -48,23 +47,32 @@ class Character(pg.sprite.Sprite):
         if self.pos.x < 800:
             if key[pg.K_RIGHT]:
                 self.pos.x += charAcc
-                self.index += 1
-                if self.index >= len(looper_char_R):
+                self.frame_count += 1
+                if self.frame_count > 2:
+                    self.index += 1
+                    self.frame_count = 0
+                if self.index == len(looper_char_R):
                     self.index = 0
                 self.image = looper_char_R[self.index]
                 self.bgX -= scroll_speed
                 self.bgX2 -= scroll_speed
         if self.pos.x >= 800:
-            self.index += 1
-            if self.index >= len(looper_char_R):
+            self.frame_count += 1
+            if self.frame_count > 2:
+                self.index += 1
+                self.frame_count = 0
+            if self.index == len(looper_char_R):
                 self.index = 0
             self.image = looper_char_R[self.index]
             self.bgX -= scroll_speed
             self.bgX2 -= scroll_speed
         if key[pg.K_LEFT]:
             self.pos.x -= charAcc
-            self.index += 1
-            if self.index >= len(looper_char_R):
+            self.frame_count += 1
+            if self.frame_count > 2:
+                self.index += 1
+                self.frame_count = 0
+            if self.index == len(looper_char_L):
                 self.index = 0
             self.image = looper_char_L[self.index]
             self.bgX += scroll_speed
