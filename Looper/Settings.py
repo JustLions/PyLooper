@@ -4,7 +4,7 @@ import random
 # Game Settings
 W, H = 1600, 900
 x = 0; y = 650; x_change = 0; y_change = 0
-FPS = 60
+FPS = 30
 Title = 'Looper'
 
 # Colors and Font
@@ -12,14 +12,14 @@ black = (0, 0, 0); white = (255, 255, 255); green = (0, 255, 0); blue = (0, 0, 1
 
 # Player properties
 charAcc = 8
-charGrav = 2
+charGrav = 3
 charFric = -0.12
-jump_height = 100
+jump_height = 70
 hp_loss = 5
 start_hp = 100
 
 # Map properties
-scroll_speed = 6
+scroll_speed = 10
 
 # Projectile properties
 bullet1Speed = 12

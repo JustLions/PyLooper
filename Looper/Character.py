@@ -16,13 +16,14 @@ class Character(pg.sprite.Sprite):
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
-        self.image = looper_char_right
-        self.rect = self.image.get_rect(x=50, y=650)
-        self.pos = vec(50, 650)
+        self.image = looper_char_R[0]
+        self.rect = self.image.get_rect(x=50, y=625)
+        self.pos = vec(50, 625)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.points = 0
         self.hp = start_hp
+        self.index = 0
 
     def update(self):
         hit_platform = pg.sprite.spritecollide(self, self.level1.platforms, 0)
@@ -30,9 +31,11 @@ class Character(pg.sprite.Sprite):
 
         # Actions when hit occurs
         if hit_platform:
-            self.pos.y = 650  # Aquí con más plataformas tendremos que decirle que se quede en pos.y de la plataforma
+            self.pos.y = 625  # Aquí con más plataformas tendremos que decirle que se quede en pos.y de la plataforma
         if char_hit_enemy:
             self.die()
+
+        pg.time.Clock().tick(50)
 
         # The function event.pump() sends the events that are ocurring
         pg.event.pump()
@@ -45,15 +48,25 @@ class Character(pg.sprite.Sprite):
         if self.pos.x < 800:
             if key[pg.K_RIGHT]:
                 self.pos.x += charAcc
-                self.image = looper_char_right
+                self.index += 1
+                if self.index >= len(looper_char_R):
+                    self.index = 0
+                self.image = looper_char_R[self.index]
                 self.bgX -= scroll_speed
                 self.bgX2 -= scroll_speed
-        if self.pos.x > 800:
+        if self.pos.x >= 800:
+            self.index += 1
+            if self.index >= len(looper_char_R):
+                self.index = 0
+            self.image = looper_char_R[self.index]
             self.bgX -= scroll_speed
             self.bgX2 -= scroll_speed
         if key[pg.K_LEFT]:
             self.pos.x -= charAcc
-            self.image = looper_char_left
+            self.index += 1
+            if self.index >= len(looper_char_R):
+                self.index = 0
+            self.image = looper_char_L[self.index]
             self.bgX += scroll_speed
             self.bgX2 += scroll_speed
         for e in pg.event.get():

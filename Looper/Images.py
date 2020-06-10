@@ -6,6 +6,23 @@ looper_char_right = pg.transform.scale(looper_char_right_pre, (100, 100))
 looper_char_left = pg.image.load("Images/Character/looper_char_left.png")
 looper_char_left = pg.transform.scale(looper_char_left, (100, 100))
 
+
+looper_char_R = []
+looper_char1_R = pg.image.load("Images/Character/looper1_R.png")
+looper_char2_R = pg.image.load("Images/Character/looper2_R.png")
+looper_char3_R = pg.image.load("Images/Character/looper3_R.png")
+looper_char1_resize_R = looper_char_R.append(pg.transform.scale(looper_char1_R, (150, 150)))
+looper_char2_resize_R = looper_char_R.append(pg.transform.scale(looper_char2_R, (150, 150)))
+looper_char3_resize_R = looper_char_R.append(pg.transform.scale(looper_char3_R, (150, 150)))
+
+looper_char_L = []
+looper_char1_L = pg.image.load("Images/Character/looper1_L.png")
+looper_char2_L = pg.image.load("Images/Character/looper2_L.png")
+looper_char3_L = pg.image.load("Images/Character/looper3_L.png")
+looper_char1_resize_L = looper_char_L.append(pg.transform.scale(looper_char1_L, (150, 150)))
+looper_char2_resize_L = looper_char_L.append(pg.transform.scale(looper_char2_L, (150, 150)))
+looper_char3_resize_L = looper_char_L.append(pg.transform.scale(looper_char3_L, (150, 150)))
+
 item_bar = pg.image.load("Images/Character/itembar.png")
 item_bar = pg.transform.scale(item_bar, (350, 60))
 
