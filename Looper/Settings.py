@@ -4,7 +4,7 @@ import random
 # Game Settings
 W, H = 1600, 900
 x = 0; y = 650; x_change = 0; y_change = 0
-FPS = 30
+FPS = 60
 Title = 'Looper'
 
 # Colors and Font

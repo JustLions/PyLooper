@@ -11,14 +11,13 @@ vec = pg.math.Vector2
 class Character(pg.sprite.Sprite):
     bgX = 0; bgX2 = bg.get_width()
     dead = False
-    image = looper_char_right
 
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
         self.image = looper_char_R[0]
-        self.rect = self.image.get_rect(x=50, y=625)
-        self.pos = vec(50, 625)
+        self.rect = self.image.get_rect(x=25, y=550)
+        self.pos = vec(100, 690)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.points = 0
@@ -32,7 +31,7 @@ class Character(pg.sprite.Sprite):
 
         # Actions when hit occurs
         if hit_platform:
-            self.pos.y = 625  # Aquí con más plataformas tendremos que decirle que se quede en pos.y de la plataforma
+            self.pos.y = 690  # Aquí con más plataformas tendremos que decirle que se quede en pos.y de la plataforma
         if char_hit_enemy:
             self.die()
 
@@ -44,7 +43,7 @@ class Character(pg.sprite.Sprite):
             self.jump(hit_platform, char_hit_enemy)
         if key[pg.K_q]:
             self.die()
-        if self.pos.x < 800:
+        if self.pos.x < 800 and self.bgX >= -bg.get_width() + 15:
             if key[pg.K_RIGHT]:
                 self.pos.x += charAcc
                 self.frame_count += 1
@@ -56,7 +55,7 @@ class Character(pg.sprite.Sprite):
                 self.image = looper_char_R[self.index]
                 self.bgX -= scroll_speed
                 self.bgX2 -= scroll_speed
-        if self.pos.x >= 800:
+        if self.pos.x >= 800 and self.bgX >= -bg.get_width() + 15:
             self.frame_count += 1
             if self.frame_count > 2:
                 self.index += 1
@@ -66,7 +65,8 @@ class Character(pg.sprite.Sprite):
             self.image = looper_char_R[self.index]
             self.bgX -= scroll_speed
             self.bgX2 -= scroll_speed
-        if key[pg.K_LEFT]:
+
+        if self.bgX <= 0 and key[pg.K_LEFT]:
             self.pos.x -= charAcc
             self.frame_count += 1
             if self.frame_count > 2:
@@ -96,8 +96,8 @@ class Character(pg.sprite.Sprite):
         # Wrap around the sides of the screen
         if self.pos.x > W:
             self.pos.x = bg.get_width()
-        if self.pos.x < 0:
-            self.pos.x = 0
+        if self.pos.x < 75:
+            self.pos.x = 75
 
     def jump(self, hit_platform, char_hit_enemy):
         # jump_sound()
