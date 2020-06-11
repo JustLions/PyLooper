@@ -1,27 +1,19 @@
 import pygame as pg
 
 # Character
-looper_char_standing_R = pg.image.load("Images/Character/looper1_standing_R.png")
-looper_char_standing_R = pg.transform.scale(looper_char_standing_R, (150, 150))
-looper_char_standing_L = pg.image.load("Images/Character/looper1_standing_L.png")
-looper_char_standing_L = pg.transform.scale(looper_char_standing_L, (150, 150))
+looper_char_standing = pg.image.load("Images/Character/looper1_standing.png")
+looper_char_standing = pg.transform.scale(looper_char_standing, (150, 150))
 
-looper_char_R = []
-looper_char1_R = pg.image.load("Images/Character/looper1_R.png")
-looper_char2_R = pg.image.load("Images/Character/looper2_R.png")
-looper_char3_R = pg.image.load("Images/Character/looper3_R.png")
-looper_char1_resize_R = looper_char_R.append(pg.transform.scale(looper_char1_R, (150, 150)))
-looper_char2_resize_R = looper_char_R.append(pg.transform.scale(looper_char2_R, (150, 150)))
-looper_char3_resize_R = looper_char_R.append(pg.transform.scale(looper_char3_R, (150, 150)))
+looper_char = []
+looper_char1 = pg.image.load("Images/Character/looper_walk1.png")
+looper_char2 = pg.image.load("Images/Character/looper_walk2.png")
+looper_char3 = pg.image.load("Images/Character/looper_walk3.png")
+looper_char1_resize = looper_char.append(pg.transform.scale(looper_char1, (150, 150)))
+looper_char2_resize = looper_char.append(pg.transform.scale(looper_char2, (150, 150)))
+looper_char3_resize = looper_char.append(pg.transform.scale(looper_char3, (150, 150)))
 
-looper_char_L = []
-looper_char1_L = pg.image.load("Images/Character/looper1_L.png")
-looper_char2_L = pg.image.load("Images/Character/looper2_L.png")
-looper_char3_L = pg.image.load("Images/Character/looper3_L.png")
-looper_char1_resize_L = looper_char_L.append(pg.transform.scale(looper_char1_L, (150, 150)))
-looper_char2_resize_L = looper_char_L.append(pg.transform.scale(looper_char2_L, (150, 150)))
-looper_char3_resize_L = looper_char_L.append(pg.transform.scale(looper_char3_L, (150, 150)))
 
+# UI
 item_bar = pg.image.load("Images/Character/itembar.png")
 item_bar = pg.transform.scale(item_bar, (350, 60))
 
@@ -36,12 +28,17 @@ health_bar_25 = pg.transform.scale(health_bar_25, (200, 50))
 health_bar_0 = pg.image.load("Images/Character/Health_bar_0.png")
 health_bar_0 = pg.transform.scale(health_bar_0, (200, 50))
 
+# Items
+health_potion_50 = pg.image.load("Images/Items/health_potion_50.png")
+health_potion_50 = pg.transform.scale(health_potion_50, (50, 75))
 
 # Enemies
-enemy_koopa_right_pre = pg.image.load("Images/Enemies/enemy_koopa_right.png")
-enemy_koopa_right = pg.transform.scale(enemy_koopa_right_pre, (100, 100))
-enemy_koopa_left_pre = pg.image.load("Images/Enemies/enemy_koopa_left.png")
-enemy_koopa_left = pg.transform.scale(enemy_koopa_left_pre, (100, 100))
+scorpion = pg.image.load("Images/Enemies/scorpion.png")
+scorpion_resize = pg.transform.scale(scorpion, (200, 200))
+
+wolf = pg.image.load("Images/Enemies/wolf.png")
+wolf = pg.transform.scale(wolf, (200, 200))
+
 
 # Bullets
 bullet1_pre = pg.image.load("Images/Character/bullet1.png")

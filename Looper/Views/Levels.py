@@ -17,7 +17,7 @@ class Level1:
         self.projectiles = pg.sprite.Group()
 
         self.character = Character(self); self.enemy = Enemy(self)
-        self.all_sprites.add(self.character); # self.all_sprites.add(self.enemy)
+        self.all_sprites.add(self.character); self.all_sprites.add(self.enemy)
         self.characters.add(self.character); self.enemies.add(self.enemy)
 
         for i in Platforms:
@@ -28,12 +28,13 @@ class Level1:
     def draw(self):
         self.screen.blit(bg, (self.character.bgX * 0.6, 0))
         self.screen.blit(bg, (self.character.bgX2 * 0.6, 0))
+        self.screen.blit(tree3, (1300 + self.character.bgX, 175))
         self.screen.blit(floor, (self.character.bgX, 450))
         self.screen.blit(floor, (self.character.bgX2, 450))
         self.screen.blit(tree2, (740 + self.character.bgX, 250))
-        self.screen.blit(tree3, (1300 + self.character.bgX, 250))
         self.screen.blit(tree1, (2400 + self.character.bgX, 400))
         self.screen.blit(sun, (150 + self.character.bgX, 100))
+        self.screen.blit(health_potion_50, (random.randint(799, 801) + self.character.bgX, random.randint(699, 701)))
 
 
         if 75 < self.character.hp <= 100:
@@ -67,18 +68,13 @@ class Level1:
                     self.screen.blit(bg, (0, 0))
             else:
                 self.screen.blit(reset_button, (700, 450))
+
+        self.projectiles.draw(self.screen)
         self.all_sprites.draw(self.screen)
         pg.display.flip()
 
-    def shoot(self):
-        self.projectile = Projectile(self)
-        self.projectile.pos = vec(self.character.pos.x + 61, self.character.pos.y + 28)
-        self.image = bullet1
-        self.rect = self.image.get_rect(x=self.character.pos.x, y=self.character.rect.y)
-        self.projectiles.add(self.projectile)
-        self.all_sprites.add(self.projectile)
-
     def update(self):
+        self.projectiles.update()
         self.all_sprites.update()
 
 
