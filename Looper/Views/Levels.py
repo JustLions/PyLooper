@@ -4,7 +4,6 @@ from Views.Platform import *
 
 
 class Level1:
-    screen = pg.display.set_mode((W, H))
 
     def __init__(self):
         self.screen = pg.display.set_mode((W, H))
@@ -15,6 +14,7 @@ class Level1:
         self.characters = pg.sprite.Group()
         self.enemies = pg.sprite.Group()
         self.projectiles = pg.sprite.Group()
+        self.items = pg.sprite.Group()
 
         self.character = Character(self); self.enemy = Enemy(self)
         self.all_sprites.add(self.character); self.all_sprites.add(self.enemy)
@@ -34,8 +34,6 @@ class Level1:
         self.screen.blit(tree2, (740 + self.character.bgX, 250))
         self.screen.blit(tree1, (2400 + self.character.bgX, 400))
         self.screen.blit(sun, (150 + self.character.bgX, 100))
-        self.screen.blit(health_potion_50, (random.randint(799, 801) + self.character.bgX, random.randint(699, 701)))
-
 
         if 75 < self.character.hp <= 100:
             self.screen.blit(health_bar_100, (20, 20))
@@ -49,6 +47,8 @@ class Level1:
             self.screen.blit(health_bar_0, (20, 20))
 
         self.screen.blit(item_bar, (600, 820))
+        if self.character.potion:
+            self.screen.blit(health_potion_50, (625, 833))
         font = pg.font.SysFont("Calibri", 25)
         char_points_ui = font.render("Points:", 1, black)
         char_points = font.render(str(self.character.points), 1, black)
@@ -70,11 +70,13 @@ class Level1:
                 self.screen.blit(reset_button, (700, 450))
 
         self.projectiles.draw(self.screen)
+        self.items.draw(self.screen)
         self.all_sprites.draw(self.screen)
         pg.display.flip()
 
     def update(self):
         self.projectiles.update()
+        self.items.update()
         self.all_sprites.update()
 
 

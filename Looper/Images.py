@@ -30,7 +30,7 @@ health_bar_0 = pg.transform.scale(health_bar_0, (200, 50))
 
 # Items
 health_potion_50 = pg.image.load("Images/Items/health_potion_50.png")
-health_potion_50 = pg.transform.scale(health_potion_50, (50, 75))
+health_potion_50 = pg.transform.scale(health_potion_50, (50, 60))
 
 # Enemies
 scorpion = pg.image.load("Images/Enemies/scorpion.png")

@@ -25,8 +25,9 @@ scroll_speed = 10
 bullet1Speed = 12
 
 # Platforms (x, y, width, height)
-Platforms = [(800, 724, 1600, 50)]
+Platforms = [(800, 775, 1600, 50)]
 Projectiles = [(50, 600, 25, 25)]
+Items = [(800, 700, 50, 75)]
 Buttons = [(700, 450, 100, 100)]
 
 # Items
