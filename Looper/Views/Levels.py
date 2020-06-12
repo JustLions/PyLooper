@@ -73,6 +73,9 @@ class Level1:
         self.items.draw(self.screen)
         self.all_sprites.draw(self.screen)
         pg.display.flip()
+    
+    def interactions(self):
+        pass
 
     def update(self):
         self.projectiles.update()
@@ -81,4 +84,3 @@ class Level1:
 
 
 level1 = Level1()
-

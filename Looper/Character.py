@@ -79,7 +79,6 @@ class Character(pg.sprite.Sprite):
             self.bgX += scroll_speed
             self.bgX2 += scroll_speed
 
-
         # Skills
         if key[pg.K_SPACE] and hit_platform:
             self.jump(hit_platform)
@@ -90,7 +89,10 @@ class Character(pg.sprite.Sprite):
                 self.projectile.pos = vec(self.pos.x + 50, self.pos.y)
         if self.potion and key[pg.K_1]:
             self.potion = False
-            self.hp = self.hp + 50
+            if 50 <= self.hp < 100:
+                self.hp = 100
+            else:
+                self.hp = self.hp + 50
 
         # Updates the rectangle position
         self.rect.center = self.pos
@@ -132,6 +134,7 @@ class Character(pg.sprite.Sprite):
 
 
 class Enemy(pg.sprite.Sprite):
+
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
@@ -166,6 +169,7 @@ class Enemy(pg.sprite.Sprite):
 
 
 class Item(pg.sprite.Sprite):
+
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
@@ -175,6 +179,7 @@ class Item(pg.sprite.Sprite):
 
 
 class Projectile(pg.sprite.Sprite):
+
     def __init__(self, level1):
         pg.sprite.Sprite.__init__(self)
         self.level1 = level1
@@ -184,7 +189,11 @@ class Projectile(pg.sprite.Sprite):
 
     def update(self):
         # Add the velocity to the position vector to move the sprite.
-        self.pos += vec(bullet1Speed, 0)
+        if self.pos.x < 700:
+            self.pos += vec(bullet1Speed, 0)
+        if self.pos.x > 700:
+            self.kill()
+
         self.rect.center = self.pos
         projectile_hit_enemy = pg.sprite.spritecollide(self, self.level1.enemies, 1)
         if projectile_hit_enemy:

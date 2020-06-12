@@ -1,6 +1,4 @@
 import pygame as pg
-import os
-import random
 
 
 class CreatePlatform(pg.sprite.Sprite):
@@ -10,4 +8,3 @@ class CreatePlatform(pg.sprite.Sprite):
         self.image = pg.Surface((w, h), pg.SRCALPHA, 32)
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
-

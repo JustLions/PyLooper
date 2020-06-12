@@ -8,4 +8,5 @@ class Game:
 
     def run(self):
         level1.draw()
+        level1.interactions()
         level1.update()
