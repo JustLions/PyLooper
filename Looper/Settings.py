@@ -23,6 +23,7 @@ scroll_speed = 10
 
 # Projectile properties
 bullet1Speed = 12
+bullet_range = 600
 
 # Platforms (x, y, width, height)
 Platforms = [(800, 775, 1600, 50)]

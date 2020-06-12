@@ -13,12 +13,12 @@ class Level1:
         self.platforms = pg.sprite.Group()
         self.characters = pg.sprite.Group()
         self.enemies = pg.sprite.Group()
-        self.projectiles = pg.sprite.Group()
         self.items = pg.sprite.Group()
+        self.projectiles = pg.sprite.Group()
 
-        self.character = Character(self); self.enemy = Enemy(self)
+        self.character = Character(); self.enemy = Enemy();
         self.all_sprites.add(self.character); self.all_sprites.add(self.enemy)
-        self.characters.add(self.character); self.enemies.add(self.enemy)
+        self.characters.add(self.character); self.enemies.add(self.enemy);
 
         for i in Platforms:
             platform = CreatePlatform(*i)
@@ -49,6 +49,7 @@ class Level1:
         self.screen.blit(item_bar, (600, 820))
         if self.character.potion:
             self.screen.blit(health_potion_50, (625, 833))
+
         font = pg.font.SysFont("Calibri", 25)
         char_points_ui = font.render("Points:", 1, black)
         char_points = font.render(str(self.character.points), 1, black)
@@ -62,22 +63,41 @@ class Level1:
                 self.screen.blit(reset_button_onhover, (700, 450))
                 if pg.mouse.get_pressed()[0] == 1:
                     Character.dead = False
-                    self.character = Character(self)
+                    self.character = Character()
                     self.all_sprites.add(self.character)
                     self.characters.add(self.character)
                     self.screen.blit(bg, (0, 0))
             else:
                 self.screen.blit(reset_button, (700, 450))
-
+        self.character.projectiles.draw(self.screen)
         self.projectiles.draw(self.screen)
         self.items.draw(self.screen)
         self.all_sprites.draw(self.screen)
         pg.display.flip()
     
     def interactions(self):
-        pass
+        char_hit_platform = pg.sprite.spritecollide(self.character, self.platforms, 0)
+        char_hit_enemy = pg.sprite.spritecollide(self.character, self.enemies, 0)
+        enemy_hit_platform = pg.sprite.spritecollide(self.enemy, self.platforms, 0)
+        proj_hit_enemy = pg.sprite.groupcollide(self.enemies, self.character.projectiles, True, True)
+
+        # Actions when hit occurs
+        if char_hit_platform:
+            self.character.pos.y = 690
+        if char_hit_enemy:
+            if self.character.hp > 0:
+                self.character.hp = self.character.hp - hp_loss
+            else:
+                pg.sprite.spritecollide(self.enemy, self.characters, 1)
+                Character.dead = True
+        if enemy_hit_platform:
+            self.enemy.pos.y = 675
+            self.enemy.pos.x = 1000 + self.character.bgX
+        if proj_hit_enemy:
+            self.character.drop()
 
     def update(self):
+        self.character.projectiles.update(self.character.pos.x)
         self.projectiles.update()
         self.items.update()
         self.all_sprites.update()
