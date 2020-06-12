@@ -110,7 +110,10 @@ class Character(pg.sprite.Sprite):
         self.shooting = True
     
     def drop(self):
-        self.potion = True
+        # 25% DropRate for a potion
+        p = 0
+        if random.randint(0, 3) == p:
+            self.potion = True
         self.points += 1
 
 
