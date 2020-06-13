@@ -1,5 +1,4 @@
 from Game import *
-from Views.Levels import *
 from Character import *
 running = True
 

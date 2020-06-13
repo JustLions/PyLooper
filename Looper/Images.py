@@ -28,6 +28,17 @@ health_bar_25 = pg.transform.scale(health_bar_25, (200, 50))
 health_bar_0 = pg.image.load("Images/Character/Health_bar_0.png")
 health_bar_0 = pg.transform.scale(health_bar_0, (200, 50))
 
+enemy_health_bar_100 = pg.image.load("Images/Character/Health_bar_100.png")
+enemy_health_bar_100 = pg.transform.scale(enemy_health_bar_100, (100, 30))
+enemy_health_bar_75 = pg.image.load("Images/Character/Health_bar_75.png")
+enemy_health_bar_75 = pg.transform.scale(enemy_health_bar_75, (100, 30))
+enemy_health_bar_50 = pg.image.load("Images/Character/Health_bar_50.png")
+enemy_health_bar_50 = pg.transform.scale(enemy_health_bar_50, (100, 30))
+enemy_health_bar_25 = pg.image.load("Images/Character/Health_bar_25.png")
+enemy_health_bar_25 = pg.transform.scale(enemy_health_bar_25, (100, 30))
+enemy_health_bar_0 = pg.image.load("Images/Character/Health_bar_0.png")
+enemy_health_bar_0 = pg.transform.scale(enemy_health_bar_0, (100, 30))
+
 # Items
 health_potion_50 = pg.image.load("Images/Items/health_potion_50.png")
 health_potion_50 = pg.transform.scale(health_potion_50, (50, 60))
@@ -38,7 +49,6 @@ scorpion_resize = pg.transform.scale(scorpion, (200, 200))
 
 wolf = pg.image.load("Images/Enemies/wolf.png")
 wolf = pg.transform.scale(wolf, (200, 200))
-
 
 # Bullets
 bullet1_pre = pg.image.load("Images/Character/bullet1.png")
@@ -58,6 +68,11 @@ floor = pg.image.load("Images/Environment/suelo.png")
 floor = pg.transform.scale(floor, (1600, 450))
 bg = pg.image.load("Images/Environment/background.png")
 bg = pg.transform.scale(bg, (1600, 700))
+
+# Platforms
+
+platform1 = pg.image.load("Images/Environment/platform1.png")
+platform1 = pg.transform.scale(platform1, (300, 50))
 
 reset_button = pg.image.load("Images/reset_button.png")
 reset_button = pg.transform.scale(reset_button, (150, 125))

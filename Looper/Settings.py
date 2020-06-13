@@ -11,7 +11,7 @@ Title = 'Looper'
 black = (0, 0, 0); white = (255, 255, 255); green = (0, 255, 0); blue = (0, 0, 128)
 
 # Player properties
-charAcc = 8
+charAcc = 20
 charGrav = 3
 charFric = -0.12
 jump_height = 70
@@ -23,10 +23,10 @@ scroll_speed = 10
 
 # Projectile properties
 bullet1Speed = 12
-bullet_range = 600
+bullet_range = 350
 
 # Platforms (x, y, width, height)
-Platforms = [(800, 775, 1600, 50)]
+Platforms = [(800, 775, 1600, 50), (703, 700, 293, 50), (475, 600, 267, 50)]
 Projectiles = [(50, 600, 25, 25)]
 Items = [(800, 700, 50, 75)]
 Buttons = [(700, 450, 100, 100)]

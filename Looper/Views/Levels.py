@@ -1,4 +1,6 @@
 from Character import *
+from Enemy import *
+from Items import *
 from Settings import *
 from Views.Platform import *
 
@@ -16,9 +18,9 @@ class Level1:
         self.items = pg.sprite.Group()
         self.projectiles = pg.sprite.Group()
 
-        self.character = Character(); self.enemy = Enemy();
-        self.all_sprites.add(self.character); self.all_sprites.add(self.enemy)
-        self.characters.add(self.character); self.enemies.add(self.enemy);
+        self.character = Character(); self.enemy_wolf = Wolf();
+        self.all_sprites.add(self.character); self.all_sprites.add(self.enemy_wolf)
+        self.characters.add(self.character); self.enemies.add(self.enemy_wolf);
 
         for i in Platforms:
             platform = CreatePlatform(*i)
@@ -26,14 +28,20 @@ class Level1:
             self.platforms.add(platform)
 
     def draw(self):
-        self.screen.blit(bg, (self.character.bgX * 0.6, 0))
-        self.screen.blit(bg, (self.character.bgX2 * 0.6, 0))
-        self.screen.blit(tree3, (1300 + self.character.bgX, 175))
-        self.screen.blit(floor, (self.character.bgX, 450))
-        self.screen.blit(floor, (self.character.bgX2, 450))
-        self.screen.blit(tree2, (740 + self.character.bgX, 250))
-        self.screen.blit(tree1, (2400 + self.character.bgX, 400))
-        self.screen.blit(sun, (150 + self.character.bgX, 100))
+        self.screen.blit(bg, (0, 0))
+        self.screen.blit(bg, (0, 0))
+
+        # Environment
+        self.screen.blit(tree3, (1300, 175))
+        self.screen.blit(floor, (0, 450))
+        self.screen.blit(floor, (0, 450))
+        self.screen.blit(tree2, (740, 250))
+        self.screen.blit(tree1, (2400, 400))
+
+        # Platforms
+        self.screen.blit(platform1, (550, 675))
+        self.screen.blit(platform1, (347, 575))
+        self.screen.blit(sun, (150, 100))
 
         if 75 < self.character.hp <= 100:
             self.screen.blit(health_bar_100, (20, 20))
@@ -45,6 +53,15 @@ class Level1:
             self.screen.blit(health_bar_25, (20, 20))
         if 0 == self.character.hp:
             self.screen.blit(health_bar_0, (20, 20))
+
+        if 75 < self.enemy_wolf.hp <= 100:
+            self.screen.blit(enemy_health_bar_100, (self.enemy_wolf.pos.x - 100, self.enemy_wolf.pos.y - 75))
+        if 50 < self.enemy_wolf.hp <= 75:
+            self.screen.blit(enemy_health_bar_75, (self.enemy_wolf.pos.x - 100, self.enemy_wolf.pos.y - 75))
+        if 25 < self.enemy_wolf.hp <= 50:
+            self.screen.blit(enemy_health_bar_50, (self.enemy_wolf.pos.x - 100, self.enemy_wolf.pos.y - 75))
+        if 0 < self.enemy_wolf.hp <= 25:
+            self.screen.blit(enemy_health_bar_25, (self.enemy_wolf.pos.x - 100, self.enemy_wolf.pos.y - 75))
 
         self.screen.blit(item_bar, (600, 820))
         if self.character.potion:
@@ -78,23 +95,31 @@ class Level1:
     def interactions(self):
         char_hit_platform = pg.sprite.spritecollide(self.character, self.platforms, 0)
         char_hit_enemy = pg.sprite.spritecollide(self.character, self.enemies, 0)
-        enemy_hit_platform = pg.sprite.spritecollide(self.enemy, self.platforms, 0)
-        proj_hit_enemy = pg.sprite.groupcollide(self.enemies, self.character.projectiles, True, True)
+        enemies_hit_platform = pg.sprite.groupcollide(self.enemies, self.platforms, False, False)
+        proj_hit_enemies = pg.sprite.groupcollide(self.enemies, self.character.projectiles, False, False)
 
+        # Enemy Aggro
+        if abs(self.enemy_wolf.pos.x - self.character.pos.x) < 500:
+            pass
         # Actions when hit occurs
         if char_hit_platform:
-            self.character.pos.y = 690
+            self.character.pos.y = char_hit_platform[0].rect.top - 50
         if char_hit_enemy:
             if self.character.hp > 0:
                 self.character.hp = self.character.hp - hp_loss
             else:
-                pg.sprite.spritecollide(self.enemy, self.characters, 1)
+                pg.sprite.spritecollide(self.enemy_wolf, self.characters, 1)
                 Character.dead = True
-        if enemy_hit_platform:
-            self.enemy.pos.y = 675
-            self.enemy.pos.x = 1000 + self.character.bgX
-        if proj_hit_enemy:
-            self.character.drop()
+        if enemies_hit_platform:
+            self.enemy_wolf.pos.y = 675
+            self.enemy_wolf.pos.x = 1000
+        if proj_hit_enemies:
+            pg.sprite.groupcollide(self.enemies, self.character.projectiles, False, True)
+            if 0 < self.enemy_wolf.hp <= 100:
+                self.enemy_wolf.hp -= 25
+            if self.enemy_wolf.hp == 0:
+                self.enemy_wolf.kill()
+                self.character.drop()
 
     def update(self):
         self.character.projectiles.update(self.character.pos.x)
