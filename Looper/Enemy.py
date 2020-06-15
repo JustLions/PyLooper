@@ -13,15 +13,6 @@ class Wolf(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.transform.flip(wolf, True, False)
-        self.rect = self.image.get_rect(x=1000, y=675)
-        self.pos = vec(1000, 675)
-        self.vel = vec(0, 0)
-        self.acc = vec(0, 0)
+        self.pos = vec(2800, 725)
+        self.rect = self.image.get_rect(x=self.pos.x-175, y=self.pos.y-148)
         self.hp = 100
-        self.rect.center = self.pos
-
-    def update(self):
-        self.pos.x -= 10
-
-    def jump(self):
-        self.pos -= vec(-10, 0)

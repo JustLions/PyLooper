@@ -7,7 +7,9 @@ from Views.Levels import *
 from Settings import *
 vec = pg.math.Vector2
 
+
 class Character(pg.sprite.Sprite):
+
     items = pg.sprite.Group()
     projectiles = pg.sprite.Group()
     dead = False
@@ -15,12 +17,13 @@ class Character(pg.sprite.Sprite):
     right = True
     potion = False
     shooting = False
+    jumping = False
 
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image = looper_char_standing
-        self.rect = self.image.get_rect(x=25, y=690)
-        self.pos = vec(100, 650)
+        self.pos = vec(100, 700)
+        self.rect = self.image.get_rect()
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.points = 0
@@ -32,9 +35,13 @@ class Character(pg.sprite.Sprite):
         # The function event.pump() sends the events that are ocurring
         pg.event.pump()
         key = pg.key.get_pressed()
+
         # Movement
-        if key[pg.K_RIGHT]:
-            self.pos.x += charAcc
+        if key[pg.K_RIGHT] or key[pg.K_d]:
+            if self.pos.x < 400:
+                self.pos.x += charAcc * 0.75
+            if self.pos.x >= 400:
+                self.pos.x += charAcc
             self.frame_count += 1
             if self.frame_count > 2:
                 self.index += 1
@@ -44,8 +51,11 @@ class Character(pg.sprite.Sprite):
             self.image = looper_char[self.index]
             self.right = True
             self.spawned = False
-        if key[pg.K_LEFT]:
-            self.pos.x -= charAcc
+        if key[pg.K_LEFT] or key[pg.K_a]:
+            if self.pos.x < 400:
+                self.pos.x -= charAcc * 0.75
+            if self.pos.x >= 400:
+                self.pos.x -= charAcc
             self.frame_count += 1
             if self.frame_count > 2:
                 self.index += 1
@@ -61,7 +71,7 @@ class Character(pg.sprite.Sprite):
             if e.type == pg.KEYDOWN and e.key == pg.K_w:
                 self.shoot()
             if e.type == pg.KEYDOWN and e.key == pg.K_SPACE:
-                self.jump()
+                Character.jumping = True
 
         # Items
         if self.potion and key[pg.K_1]:
@@ -82,16 +92,10 @@ class Character(pg.sprite.Sprite):
         self.pos += self.vel + 0.5 * self.acc
 
         # Wrap around the sides of the screen
-        if self.pos.x > W:
+        if self.pos.x > map_x_size:
             self.pos.x = bg.get_width()
         if self.pos.x < 75:
             self.pos.x = 75
-
-    def jump(self):
-        # jump_sound()
-        self.pos.y += -jump_height
-        self.vel.y = -jump_height / 2.5
-        self.acc = vec(0, 5)
 
     def shoot(self):
         projectile = Projectile(self.pos.x, self.pos.y, self.right, self.spawned)
