@@ -2,7 +2,7 @@ from Character import *
 from Enemy import *
 from Items import *
 from Settings import *
-from Views.Platform import *
+from Views.Visuals import *
 
 
 class Level1:
@@ -12,17 +12,23 @@ class Level1:
         self.camera = Camera(map_x_size, map_y_size)  # Luego sustituir cons self.map.width, self.map.height
 
         # We create the sprite groups for the specific level and add our character and enemy class to it
-        self.all_sprites = pg.sprite.Group()
+        self.all_sprites = pg.sprite.Group(); self.events = pg.sprite.Group()
         self.platforms = pg.sprite.Group(); self.characters = pg.sprite.Group(); self.enemies = pg.sprite.Group()
 
         self.character = Character(); self.enemy_wolf = Wolf();
         self.all_sprites.add(self.character, self.enemy_wolf)
         self.characters.add(self.character); self.enemies.add(self.enemy_wolf);
 
+        # We add each object that will appear on the map
+
         for i in Floor:
             map_floor = CreateFloor(*i)
             self.platforms.add(map_floor)
             self.all_sprites.add(map_floor)
+
+        for i in Fireballs:
+            fireball = CreateFireball(*i)
+            self.events.add(fireball)
 
         for i in Platforms:
             platform = CreatePlatform(*i)
@@ -38,6 +44,8 @@ class Level1:
         self.screen.blit(tree2, (740 - self.character.pos.x * 0.8, 250))
         self.screen.blit(tree1, (2400 - self.character.pos.x * 0.8, 400))
         self.screen.blit(sun, (150 - self.character.pos.x * 0.8, 100))
+        self.screen.blit(fireball_exit, (2662 - self.character.pos.x, 730))
+        self.screen.blit(fireball_exit, (3150 - self.character.pos.x, 730))
 
         # Health Bars
         if 75 < self.character.hp <= 100:
@@ -48,7 +56,7 @@ class Level1:
             self.screen.blit(health_bar_50, (20, 20))
         if 0 < self.character.hp <= 25:
             self.screen.blit(health_bar_25, (20, 20))
-        if 0 == self.character.hp:
+        if self.character.hp <= 0:
             self.screen.blit(health_bar_0, (20, 20))
         if 75 < self.enemy_wolf.hp <= 100:
             self.screen.blit(enemy_health_bar_100, (Wolf().pos.x - self.character.pos.x + 260, 620))
@@ -91,11 +99,14 @@ class Level1:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
         for sprite in self.all_sprites:
             self.screen.blit(sprite.image, self.camera.apply(sprite))
+        for sprite in self.events:
+            self.screen.blit(sprite.image, self.camera.apply(sprite))
         pg.display.flip()
 
     def interactions(self):
         char_hit_platform = pg.sprite.spritecollide(self.character, self.platforms, 0)
-        char_hit_enemy = pg.sprite.spritecollide(self.character, self.enemies, 0)
+        char_hit_event = pg.sprite.spritecollide(self.character, self.events, 0)
+        char_hit_enemy = pg.sprite.groupcollide(self.all_sprites, self.events, False, False)
         enemies_hit_platform = pg.sprite.groupcollide(self.enemies, self.platforms, False, False)
         proj_hit_enemies = pg.sprite.groupcollide(self.enemies, self.character.projectiles, False, False)
 
@@ -103,16 +114,22 @@ class Level1:
         if abs(self.enemy_wolf.pos.x - self.character.pos.x) < 500:
             pass
 
-        print(self.platforms.rect.colliderect)
         # Actions when hit occurs
         if char_hit_platform:
-            self.character.pos.y = char_hit_platform[0].rect.top - 55
-            if Character.jumping:
-                # jump_sound()
-                self.character.pos.y += -jump_height
-                self.character.vel.y = -jump_height / 2.5
-                self.character.acc = vec(0, 5)
-                Character.jumping = False
+            lowest = char_hit_platform[0]
+            for hit in char_hit_platform:
+                if hit.rect.bottom > lowest.rect.bottom:
+                    lowest = hit
+            if self.character.pos.y < lowest.rect.centery:
+                self.character.pos.y = lowest.rect.top - 55
+
+        if char_hit_event:
+            self.character.hp -= fireball_damage
+            if self.character.hp > 0:
+                self.character.hp = self.character.hp - hp_loss
+            else:
+                pg.sprite.groupcollide(self.all_sprites, self.events, True, False)
+                Character.dead = True
 
         if char_hit_enemy:
             if self.character.hp > 0:
@@ -123,6 +140,7 @@ class Level1:
         if enemies_hit_platform:
             self.enemy_wolf.pos.y = 675
             self.enemy_wolf.pos.x = 1000
+
         if proj_hit_enemies:
             pg.sprite.groupcollide(self.enemies, self.character.projectiles, False, True)
             if 0 < self.enemy_wolf.hp <= 100:
@@ -135,6 +153,7 @@ class Level1:
         self.character.projectiles.update(self.character.pos.x)
         self.platforms.update()
         self.all_sprites.update()
+        self.events.update()
         self.camera.update(self.character)
 
 

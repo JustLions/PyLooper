@@ -1,8 +1,3 @@
-import pygame as pg
-import time
-import random
-from Images import *
-from Sounds import *
 from Views.Levels import *
 from Settings import *
 vec = pg.math.Vector2

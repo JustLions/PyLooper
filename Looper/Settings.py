@@ -19,7 +19,7 @@ black = (0, 0, 0); white = (255, 255, 255); green = (0, 255, 0); blue = (0, 0, 1
 charAcc = 15
 charGrav = 3
 charFric = -0.12
-jump_height = 70
+jump_height = 120
 hp_loss = 5
 start_hp = 100
 
@@ -29,14 +29,19 @@ EnemySpeed = 30
 # Map properties
 scroll_speed = 10
 
+# Event properties
+fireball_speed = 35
+fireball_damage = 7
+
 # Projectile properties
 bullet1Speed = 20
 bullet_range = 350
 
 # Platforms (x, y, width, height)
 Floor = [(800, 775, 5000, 50)]
-Platforms = [(2300, 420, 293, 50), (2000, 500, 267, 50)]
+Platforms = [(2000, 600, 267, 50), (2500, 520, 293, 50), (3000, 450, 267, 50)]
 Projectiles = [(50, 600, 25, 25)]
+Fireballs = [(2300, 700, 50, 50), (2788, 700, 50, 50)]
 Items = [(800, 700, 50, 75)]
 Buttons = [(700, 450, 100, 100)]
 

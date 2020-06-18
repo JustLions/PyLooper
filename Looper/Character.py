@@ -1,9 +1,5 @@
-import pygame as pg
-import time
-import random
-from Images import *
-from Sounds import *
 from Views.Levels import *
+from Views.Images import *
 from Settings import *
 vec = pg.math.Vector2
 
@@ -17,12 +13,11 @@ class Character(pg.sprite.Sprite):
     right = True
     potion = False
     shooting = False
-    jumping = False
 
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image = looper_char_standing
-        self.pos = vec(100, 700)
+        self.pos = vec(100, 695)
         self.rect = self.image.get_rect()
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
@@ -65,13 +60,19 @@ class Character(pg.sprite.Sprite):
             self.image = pg.transform.flip(looper_char[self.index], True, False)
             self.right = False
             self.spawned = False
-
+        if key[pg.K_e]:
+            if self.right:
+                self.pos.x += 50
+            else:
+                self.pos.x -= 50
         # Skills
         for e in pg.event.get():
             if e.type == pg.KEYDOWN and e.key == pg.K_w:
                 self.shoot()
-            if e.type == pg.KEYDOWN and e.key == pg.K_SPACE:
-                Character.jumping = True
+            if e.type == pg.KEYDOWN and e.key == pg.K_SPACE and self.acc.y < 0.5:
+                self.pos.y += -jump_height
+                self.vel.y = -jump_height / 2.5
+                self.acc = vec(0, 5)
 
         # Items
         if self.potion and key[pg.K_1]:
