@@ -30,7 +30,7 @@ EnemySpeed = 30
 scroll_speed = 10
 
 # Event properties
-fireball_speed = 35
+fireball_speed = 30
 fireball_damage = 7
 
 # Projectile properties
@@ -38,8 +38,9 @@ bullet1Speed = 20
 bullet_range = 350
 
 # Platforms (x, y, width, height)
-Floor = [(800, 775, 5000, 50)]
+Floor = [(800, 775, 10000, 50)]
 Platforms = [(2000, 600, 267, 50), (2500, 520, 293, 50), (3000, 450, 267, 50)]
+Objects = [(2266, 730, 200, 200), (2750, 730, 200, 200)]
 Projectiles = [(50, 600, 25, 25)]
 Fireballs = [(2300, 700, 50, 50), (2788, 700, 50, 50)]
 Items = [(800, 700, 50, 75)]

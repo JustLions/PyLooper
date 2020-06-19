@@ -28,9 +28,19 @@ class CreateFireball(pg.sprite.Sprite):
         self.x = fireb_x
         self.y = fireb_y
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        self.rect.center = (fireb_x, fireb_y)
 
     def update(self):
         self.rect.y -= fireball_speed
         if self.rect.center < (self.x, 0):
             self.rect.center = (self.x, self.y + 25)
+
+
+class CreateFireballExit(pg.sprite.Sprite):
+
+    def __init__(self, fireexit_x, fireexit_y, w, h):
+        pg.sprite.Sprite.__init__(self)
+        self.image = fireball_exit
+        self.x = fireexit_x
+        self.y = fireexit_y
+        self.rect = self.image.get_rect(x=fireexit_x, y=fireexit_y)
